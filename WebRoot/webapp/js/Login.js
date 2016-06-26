@@ -27,14 +27,14 @@ function login(){
 				success : function(response,options) {
 					try {
 						var obj = eval("("+response.responseText+")");
-						var loginCode = obj.UserLoginCode;						
+						var loginCode = obj.UserStateCode;						
 									
 						switch(loginCode){
-							case 30000:								
-								window.location.href = "webapp/page/welcome.html";
+							case 3000:								
+								window.location.href = "webapp/page/homepage.html";
 								break;
 							default:
-								Ext.MessageBox.alert("提示","登陆失败---错误码为:"+loginCode+"!",function(){});
+								Ext.MessageBox.alert("提示","登陆失败---错误码为:"+loginCode+"!");
 								break;
 						}
 																		

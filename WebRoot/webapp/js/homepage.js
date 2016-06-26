@@ -3,8 +3,24 @@
  */
 
 $(window).load(function(){
+    
     loadProductContent();
+    isOnline();
 });
+
+function isOnline(){
+
+    var COOKIE_NAME = "UserStateCookie";
+
+    if($.cookie(COOKIE_NAME)){
+        $(".link_login").text($.cookie(COOKIE_NAME)+"è¯·ç™»å½•");
+    }
+    else{
+        console.info("cookieLog","no Cookies");
+    }
+    //
+
+}
 
 function loadProductContent(){
 
@@ -15,20 +31,17 @@ function loadProductContent(){
         url:"toProductgetContent.action",
         async:false,
         success:function(data){
-//        	var str;
             $.each(data.data,function(i,value){
-                //È¡³öÊı¾İ
+
                 var name = value.categorydesc;
                 var url = value.url;
                 var str = "<li><a href='"+url+"'>"+name+"</a></li>";
-                console.log("li",str);
                 content_list.append(str);
             });
             
-            console.info("fuck");
         },
         error:function(){
-            alert("¼ÓÔØÄ¿Â¼³ö´í");
+            alert("è·å–ç›®å½•å¤±è´¥");
         }
     });
 }

@@ -28,6 +28,7 @@ function signup(){
      formValidate();
  });
 
+//表单验证
 function formValidate(){
     $("#signup_form").validate({
         rules:{
@@ -40,11 +41,98 @@ function formValidate(){
                 minlength:5
             },
             age:{
-                required:true
+                required:true,
+                digits:true
+            },
+            sex:{
 
+            },
+            password:{
+                minlength:6
+            },
+            email:{
+              email:true
+            },
+            mobilePhone:{
+              rangelength:[11,11]
             }
+        },
+        message:{
+
         }
     });
+    
+    //单独进行后端验证
+    var $nickName = $("input[name=nickName]");
+    var $email = $("input[name=email]");
+    var $mobilePhone = $("input[name=mobilePhone]");
+
+    $nickName.bind("blur",function(){
+       //失去焦点，发送验证
+        $.ajax({
+            url:"toUserfindUserByNickName.action",
+            dataType:"json",
+            data:{
+                "nickName":$nickName.val()
+            },
+            success:function(data,type){
+                if(data.UserStateCode===30014){
+                    //未被占用
+                    alert("该昵称未被占用");
+                }
+                else if(data.UserStateCode===30011){
+                    alert("该昵称已被占用");
+                }
+            }
+
+        });
+
+    });
+    
+    $email.bind("blur",function(){
+        //失去焦点，发送验证
+         $.ajax({
+             url:"toUserfindUserByEmail.action",
+             dataType:"json",
+             data:{
+                 "email":$email.val()
+             },
+             success:function(data,type){
+                 if(data.UserStateCode===30015){
+                     //未被占用
+                     alert("该email未被占用");
+                 }
+                 else if(data.UserStateCode===30012){
+                     alert("该email已被占用");
+                 }
+             }
+
+         });
+
+     });
+    
+    $mobilePhone.bind("blur",function(){
+        //失去焦点，发送验证
+         $.ajax({
+             url:"toUserfindUserByPhoneNumber.action",
+             dataType:"json",
+             data:{
+                 "mobilePhone":$mobilePhone.val()
+             },
+             success:function(data,type){
+                 if(data.UserStateCode===30016){
+                     //未被占用
+                     alert("该号码未被占用");
+                 }
+                 else if(data.UserStateCode===30013){
+                     alert("该号码已被占用");
+                 }
+             }
+
+         });
+
+     });
+
 }
 
 function imgToolTip(){

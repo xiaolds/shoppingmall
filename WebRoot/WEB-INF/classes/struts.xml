@@ -15,7 +15,7 @@
            
            <!-- 定义全局拦截器 -->
            <interceptors>
-                <interceptor-stack name="myDefaultStack">
+	          <interceptor-stack name="myDefaultStack">
                     <interceptor-ref name="defaultStack"/>
                     
                 </interceptor-stack>
@@ -36,6 +36,9 @@
 	            <result name="returnJson" type="json">
 	                  <param name="root">dataMap</param>
                 </result>
+                <result name="returnText" type="plainText">
+                    <param name="charSet">UTF-8</param>
+                </result>
            
            </global-results>
            
@@ -43,13 +46,25 @@
 
 
     <package name="lee" extends="struts-base" >
+    
+        <interceptors>
+            <interceptor name="cookieInterceptor" class="org.apache.struts2.interceptor.CookieInterceptor"/>
+        </interceptors>
         
         <action name="toUser*" class="com.datasure.login.action.UserAction" method="{1}">
             <result name="success">/webapp/page/login/welcome.html</result>
-            <result name="input">/webapp/login.html</result>
-        </action>
+            <result name="input">/webapp/login.html</result><!--
+            
+            <interceptor-ref name="cookieInterceptor">
+                <param name="cookiesName">UserStateCookie</param>
+                <param name="cookiesValue">*</param>
+            </interceptor-ref>
+            <interceptor-ref name="myDefaultStack"></interceptor-ref>
+            
+           --></action>
         
         <action name="toProduct*" class="com.datasure.login.action.ProductAction" method="{1}">
+            
             
         </action>
     

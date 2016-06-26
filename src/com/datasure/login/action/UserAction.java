@@ -34,6 +34,7 @@ public class UserAction extends BaseAction{
 	
 	public static final String UserStateCode = "UserStateCode";
 	public static final String UserStateSession = "UserStateSession";
+	public static final String UserStateCookie = "UserStateCookie";
 	
 	
 	//系统所用业务处理逻辑
@@ -46,6 +47,7 @@ public class UserAction extends BaseAction{
 		//TODO 另外也可以从IP地址进行判断
 		
 		if(userService.validLogin(getNickName().trim(), getPassword())) {
+			System.out.println(getNickName());
 			
 			//成功
 			dataMap.put(UserStateCode, UserState.LOGIN);
@@ -53,8 +55,23 @@ public class UserAction extends BaseAction{
 			Map<String, Object> sessionMap = getSession();
 			sessionMap.put(UserStateSession, getNickName().trim());
 			//同时向客户端添加一条Cookie
-			Cookie usrInfoCookie = cookieUtil.addCookie(getNickName().trim());
-			response.addCookie(usrInfoCookie);
+/*//			cookieMap.put(UserStateCookie, getNickName().trim());
+			if(cookieMap.containsKey(UserStateCookie)){
+				Cookie c = cookieMap.get(UserStateCookie);
+			}*/
+			
+			Cookie c = cookieUtil.getCookie(request, UserStateCookie);
+			
+			if(null == c){
+				//全新创建一个
+				c = cookieUtil.createCookie(UserStateCookie, getNickName().trim());
+			}
+			else{
+				c = cookieUtil.updateCookie(c, getNickName().trim());
+			}
+			
+			response.addCookie(c);
+			
 		}else{
 			//登陆失败
 			dataMap.put(UserStateCode, UserState.PWD_NOT_CRT);
@@ -122,11 +139,11 @@ public class UserAction extends BaseAction{
 		User user = userService.getUser("nickname", getNickName());
 		
 		if(null == user){
-			//昵称已经存在
-			dataMap.put(UserStateCode, UserState.NICKNAME_EXIST);
-		}else{
 			//昵称未被占用
 			dataMap.put(UserStateCode, UserState.NICKNAME_NOT_EXIT);
+		}else{
+			//昵称已经存在
+			dataMap.put(UserStateCode, UserState.NICKNAME_EXIST);
 		}
 		return "returnJson";
 	}
@@ -136,11 +153,12 @@ public class UserAction extends BaseAction{
 		User user = userService.getUser("phone", getMobilePhone());
 		
 		if(null == user){
-			//手机号码已经存在
-			dataMap.put(UserStateCode, UserState.PHONE_EXIT);
-		}else{
+			
 			//手机未被占用
 			dataMap.put(UserStateCode, UserState.PHONE_NOT_EXIT);
+		}else{
+			//手机号码已经存在
+			dataMap.put(UserStateCode, UserState.PHONE_EXIT);
 		}
 		
 		return "returnJson";
@@ -148,14 +166,14 @@ public class UserAction extends BaseAction{
 	
 	public String findUserByEmail() throws Exception {
 		
-		User user = userService.getUser("email", getNickName());
+		User user = userService.getUser("email", getEmail());
 		
 		if(null == user){
-			//email已经存在
-			dataMap.put(UserStateCode, UserState.EMAIL_EXIST);
-		}else{
 			//email未被占用
 			dataMap.put(UserStateCode, UserState.EMAIL_NOT_EXIST);
+		}else{
+			//email已经存在
+			dataMap.put(UserStateCode, UserState.EMAIL_EXIST);
 		}
 		return "returnJson";
 	}
@@ -250,6 +268,8 @@ public class UserAction extends BaseAction{
 	protected String getActionClassFullName() {
 		return "com.datasure.login.action.UserAction";
 	}
+
+	
 	
 	
 }

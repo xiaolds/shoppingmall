@@ -20,7 +20,8 @@ public class UserServiceImpl implements UserService {
 	private UserDao userDao;
 	
 	@Override
-	public boolean validLogin(String username, String password) {
+	public boolean validLogin(String username, String password)
+								throws DataAccessException{
 		return userDao.isValid(username, password);
 	}
 	

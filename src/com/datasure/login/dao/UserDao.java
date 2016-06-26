@@ -4,6 +4,8 @@ package com.datasure.login.dao;
  * 查询是否存在该用户
  */
 
+import org.springframework.dao.DataAccessException;
+
 import com.datasure.common.dao.BaseDao;
 import com.datasure.login.domain.User;
 
@@ -11,7 +13,8 @@ public interface UserDao extends BaseDao<User> {
 	
 	/**用户是否存在
 	 */
-	public boolean isValid(String username, String password);
+	public boolean isValid(String username, String password) 
+								throws DataAccessException;
 	
 	/**
 	 * 
@@ -19,7 +22,7 @@ public interface UserDao extends BaseDao<User> {
 	 *
 	 * @author LiDongSheng
 	 */
-	public void updateUser(User user);
+	public void updateUser(User user) throws DataAccessException;
 	
 	/**
 	 * 
@@ -28,7 +31,7 @@ public interface UserDao extends BaseDao<User> {
 	 * @author LiDongSheng
 	 * @param user
 	 */
-	public void deleteUser(User user);
+	public void deleteUser(User user) throws DataAccessException;
 	
 	/**
 	 * 
@@ -39,7 +42,7 @@ public interface UserDao extends BaseDao<User> {
 	 * @param value: 键值，如"Lids"
 	 * @return 返回查询到的用户信息
 	 */
-	public User getUser(String key, String value);
+	public User getUser(String key, String value) throws DataAccessException;
 	
 	/**
 	 * 
@@ -47,7 +50,7 @@ public interface UserDao extends BaseDao<User> {
 	 * @author LiDongSheng
 	 * @param user
 	 */
-	public void addUser(User user);
+	public void addUser(User user) throws DataAccessException;
 	
 	
 }
