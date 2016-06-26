@@ -1,0 +1,154 @@
+@CHARSET "UTF-8";
+
+*{margin:0; padding:0}
+
+div{display: block;}
+
+.home_header{
+    position:absolute;
+    background-color: #00aaaa;
+    height:99px;
+    width:100%;
+    clear: both;
+    border-bottom: 1px solid #ffffff;
+}
+
+.app_icon img{
+    width:80px;
+    height: 80px;
+    margin-left: 80px;
+    margin-right:10px;
+    margin-top: 10px;
+    float:left;
+}
+
+.login_status,.app_name,.shoppingmall_info{
+    color:#ffffff;
+    font-size:large;
+}
+.app_name{
+    text-align: center;
+}
+
+.app_name h1{
+    margin-top:30px;
+}
+
+.login_status{
+    position: absolute;
+    top:40px;
+    right:10px;
+}
+
+/**inner*/
+.body_wrap{
+    background-color: #d3dce1;
+    position:absolute!important;
+    top:100px!important;
+    bottom:40px;
+    width:100%;
+    overflow:hidden;
+}
+.home_body{
+    margin:0 auto;
+    width:920px;
+    height: 100%;
+    clear:both;
+}
+
+.home_content{
+    padding:10px auto;
+    position:absolute;
+    width:150px;
+    height:100%;
+    clear: both;
+
+}
+
+.home_product{
+    position:relative;
+    left: 160px;
+    width: 750px;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.rotation_pic_wrap{
+    width:100%;
+}
+.product_display{
+    width: 100%;
+    height: 100%;
+}
+
+/******目录效果*****/
+ul{
+    list-style-type: none;
+    background-color: #00aaaa;;
+}
+li{
+    display: list-item;
+    font-size: large;
+    text-align: center;
+    padding:10px;
+}
+
+.home_content a{
+    margin:10px auto;
+    text-decoration: none;
+    color:#000000;
+
+}
+
+/*.home_body,.home_content,.home_product,.rotation_pic_wrap,.product_display{
+    border: solid 2px;
+}*/
+
+/****轮播图****/
+.out{ position:relative; width: 690px; height: 260px;margin:0 auto; overflow:hidden; }
+.con{ position:absolute;  width:999999px;}
+.con li,.con img{ float:left;}
+.nav{ position:absolute; text-align:center; height:20px; bottom:0px;}
+.nav span{ display:inline-block; background:#CCC; height: 10px; width:30px;  }
+.nav .active{  background:#00F; }
+
+/***商品详细信息**/
+
+.product_display{
+    padding:0 6px;
+}
+
+.product_detail{
+    float:left;
+    width:120px;
+    height:150px;
+    padding:10px 10px;
+}
+
+.prdt_img{
+    width:100px;
+    height: 100px;
+}
+
+.prdt_name{
+    text-align: center;
+}
+
+/**footer*/
+.shopping_footer{
+
+    position:absolute;
+    width:100%;
+    background-color: #00aaaa;
+    height: 39px;
+    line-height: 32px;
+    letter-spacing: 1px;
+    text-align: center;
+    border-top:1px solid #ffffff;
+    clear: both;
+    bottom: 0;
+    left: 0;
+    right:0;
+}
+

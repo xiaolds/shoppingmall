@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.datasure.login.domain.Category" table="d_category" catalog="shoppingmall">
+        <id name="categoryid" type="java.lang.Integer">
+            <column name="categoryid" />
+            <generator class="native" />
+        </id>
+        <property name="fatherid" type="java.lang.Integer">
+            <column name="fatherid">
+                <comment>父种类</comment>
+            </column>
+        </property>
+        <property name="categoryname" type="java.lang.String">
+            <column name="categoryname">
+                <comment>种类名称</comment>
+            </column>
+        </property>
+        <property name="categorygrade" type="java.lang.Integer">
+            <column name="categorygrade">
+                <comment>种类等级，最高的等级为1</comment>
+            </column>
+        </property>
+        <property name="categorydesc" type="java.lang.String">
+            <column name="categorydesc">
+                <comment>种类描述</comment>
+            </column>
+        </property>
+        <property name="url" type="java.lang.String">
+            <column name="url">
+                <comment>链接</comment>
+            </column>
+        </property>
+        <set name="Products" inverse="true" cascade="save-update" table="d_product" >
+            <key not-null="true">
+                <column name="categoryid" not-null="true">
+                    <comment>商品种类id</comment>
+                </column>
+            </key>
+            <!--<index>
+                <column name="productid"></column>
+            </index>
+            --><one-to-many class="com.datasure.login.domain.Product" />
+        </set>
+    </class>
+</hibernate-mapping>

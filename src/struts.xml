@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+    <!-- 配置了系列常量 -->
+    <constant name="struts.i18n.encoding" value="UTF-8"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true"/> 
+    <!-- 使用Spring管理系统数据 -->
+    <constant name="struts.objectFactory" value="spring" />
+
+
+    <!-- 定义基础的包 -->
+    <package name="struts-base" extends="json-default" namespace="/" abstract="true">
+           
+           <!-- 定义全局拦截器 -->
+           <interceptors>
+                <interceptor-stack name="myDefaultStack">
+                    <interceptor-ref name="defaultStack"/>
+                    
+                </interceptor-stack>
+           </interceptors>
+           
+           <!-- 定义默认拦截器 --> 
+           <default-interceptor-ref name="myDefaultStack"/>
+           
+          <!-- 定义全局result -->
+           <global-results>
+                <result name="redirect" type="redirect">${returnPageURL}</result>
+	            <result name="dispatcher" type="dispatcher">${returnPageURL}</result>
+	            <result name="redirectAction" type="redirectAction">${returnPageURL}</result>
+	            <result name="exception">/exception.jsp</result>
+	            <result name="login">/login.html</result>
+	            <result name="loginOut">/login.html</result>
+	            <result name="fail">/login.html</result>
+	            <result name="returnJson" type="json">
+	                  <param name="root">dataMap</param>
+                </result>
+           
+           </global-results>
+           
+    </package>
+
+
+    <package name="lee" extends="struts-base" >
+        
+        <action name="toUser*" class="com.datasure.login.action.UserAction" method="{1}">
+            <result name="success">/webapp/page/login/welcome.html</result>
+            <result name="input">/webapp/login.html</result>
+        </action>
+        
+        <action name="toProduct*" class="com.datasure.login.action.ProductAction" method="{1}">
+            
+        </action>
+    
+    </package>
+
+</struts>    

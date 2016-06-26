@@ -1,0 +1,105 @@
+@CHARSET "UTF-8";
+
+*{margin:0; padding:0}
+
+
+
+.signup_header{
+    position:absolute;
+    background-color: #00aaaa;
+    height:100px;
+    width:100%;
+    clear: both;
+}
+.app_icon img{
+    width:80px;
+    height: 80px;
+    margin-left: 80px;
+    margin-right:10px;
+    margin-top: 10px;
+    float:left;
+}
+.signup_welcome,.login{
+    position:relative;
+    font-size: large;
+    color: #fff;
+    margin: 40px 40px;
+    float:left;
+}
+.login{
+    float:right;
+}
+
+.signup_body{
+    background-color: #d3dce1;
+
+    position:absolute!important;
+    top:100px!important;
+    bottom:40px;
+    width:100%;
+    overflow:hidden;
+    height:auto!important;
+}
+
+.user_info ul{
+    list-style:none;
+}
+
+.ipt input{
+    height:30px;
+    width:240px;
+    margin:10px 2px;
+    font-family: "Microsoft Yahei";
+}
+.user_info{
+    margin:40px;
+    float:left;
+
+}
+.submit {
+    background-color: #00aaaa;
+    text-shadow: 1px 1px 1px rgba(255,255,255, .22);
+
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+
+    -webkit-box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+    -moz-box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+    box-shadow: 1px 1px 1px rgba(0,0,0, .29), inset 1px 1px 1px rgba(255,255,255, .44);
+
+    -webkit-transition: all 0.15s ease;
+    -moz-transition: all 0.15s ease;
+    -o-transition: all 0.15s ease;
+    -ms-transition: all 0.15s ease;
+    transition: all 0.15s ease;
+    color:#ffffff;
+}
+
+.signup_tip img{
+    margin:60px;
+
+    float:right;
+    width:220px;
+    height:350px;
+}
+.content_wrap{
+    margin:0 auto;
+    width:950px;
+    height:750px;
+}
+
+.signup_footer{
+
+    position:absolute;
+    width:100%;
+    background-color: #00aaaa;
+    height: 40px;
+    line-height: 32px;
+    letter-spacing: 1px;
+    text-align: center;
+    clear: both;
+    bottom: 0;
+    left: 0;
+    right:0;
+}

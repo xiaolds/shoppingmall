@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+    
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<!-- 配置数据源，数据源使用C3P0，需要引入相关数据源jar包 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+        destroy-method="close"
+        p:driverClass="com.mysql.jdbc.Driver"
+        p:jdbcUrl="jdbc:mysql://localhost:3306/shoppingmall"
+        p:user="root"
+        p:password="xiaolds1225"
+        p:maxPoolSize="200"
+        p:minPoolSize="2"
+        p:initialPoolSize="2"
+        p:maxIdleTime="20"
+       
+        />
+        
+    <!-- 定义sessionFactory,使用Hibernate3进行数据库连接 -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean"
+        p:dataSource-ref="dataSource">
+	    <!-- 列出全部持久化类 -->    
+	    <property name="mappingResources">
+	        <list>
+	           <!-- 以下为全部持久化PO类 -->
+	           <value>com/datasure/login/domain/User.hbm.xml</value>
+	           <value>com/datasure/login/domain/Address.hbm.xml</value>
+	           <value>com/datasure/login/domain/Category.hbm.xml</value>
+	           <value>com/datasure/login/domain/Item.hbm.xml</value>
+	           <value>com/datasure/login/domain/Order.hbm.xml</value>
+	           <value>com/datasure/login/domain/Product.hbm.xml</value>
+	        </list>
+	    </property>    
+        
+        <!-- 定义SessionFactory的属性 -->
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">
+                    org.hibernate.dialect.MySQL5InnoDBDialect
+                </prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <!-- 显示sql语句 -->
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+            </props>
+        </property>
+
+    </bean>
+    
+    <!-- 以下为所有Service类 -->
+	<bean id="userService" 
+	class="com.datasure.login.service.impl.UserServiceImpl" p:userDao-ref="userDao"/>
+	<bean id="categoryService"
+	class="com.datasure.login.service.impl.CategoryServiceImpl" p:categoryDao-ref="categoryDao"/>
+	
+	
+    <!-- 以下为所有Dao类 -->	
+    <bean id="userDao" 
+    class="com.datasure.login.dao.impl.UserDaoImpl" p:sessionFactory-ref="sessionFactory"/>
+	<bean id="categoryDao"
+	class="com.datasure.login.dao.impl.CategoryDaoImpl" p:sessionFactory-ref="sessionFactory"/>
+
+
+</beans>

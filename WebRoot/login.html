@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>登陆</title>
+	
+    <meta http-equiv="description" content="登陆商城">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <!-- Extjs 核心样式库 -->
+    <link rel="stylesheet" type="text/css" href="webapp/app/ext-4.2.1/resources/ext-theme-neptune/ext-theme-my.css" />
+    
+    <link rel="stylesheet" type="text/css" href="webapp/css/base.css">
+    <link rel="stylesheet" type="text/css" href="webapp/css/login.css">
+    
+    <!-- Extjs 核心脚本 -->
+    <script type="text/javascript" src="webapp/app/ext-4.2.1/ext-all.js"></script>
+    <!-- 账户登录-->
+    <script type="text/javascript" src="webapp/js/Login.js"></script>
+
+  </head>
+  
+  <body>
+    
+    <div class="login_logo">
+    <div class="login_header">
+        <a class="signup" href="./webapp/page/signup.html">注册</a>
+        <a class="help">使用帮助</a>
+    </div>
+    <div class="app_name"><a><h1>东东购物商城</h1></a></div>
+</div>
+  
+    <div class="login">
+    <form class="login_form"  method="post" action="">
+        <ul>
+        <li class="ipt user_wrap">
+            <input type="text" class="username" id="userName" name="userName" placeholder="用户" value="">
+        </li>
+        <li class="ipt pass_wrap">
+            <input type="password" class="password" id="userPwd" name="userPwd" placeholder="密码" value="">
+            <input type="hidden"  name="userLoginType" id="userLoginType" value="">
+        </li>
+        <li class="ipt submit_wrap">
+            <input type="button" value="登陆" class="submit" onclick="login()">
+        </li>
+        <li class="login_footer">
+            <a>找回密码?</a>
+        </li>
+        </ul>
+    </form>
+    </div>
+ </body>
+</html>

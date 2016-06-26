@@ -1,0 +1,68 @@
+@CHARSET "UTF-8";
+
+*{margin:0; padding:0}
+
+div{display: block;}
+
+.home_header{
+    position:absolute;
+    background-color: #00aaaa;
+    height:100px;
+    width:100%;
+    clear: both;
+}
+
+.app_icon img{
+    width:80px;
+    height: 80px;
+    margin-left: 80px;
+    margin-right:10px;
+    margin-top: 10px;
+    float:left;
+}
+
+.login_status,.app_name,.shoppingmall_info{
+    color:#ffffff;
+    font-size:large;
+}
+.app_name{
+    text-align: center;
+}
+
+.app_name h1{
+    margin-top:30px;
+}
+
+.login_status{
+    position: absolute;
+    top:40px;
+    right:10px;
+}
+
+/**inner*/
+
+.body_wrap{
+    background-color: #d3dce1;
+    position:absolute!important;
+    top:100px!important;
+    bottom:40px;
+    width:100%;
+    overflow:hidden;
+}
+
+/**footer*/
+.shopping_footer{
+
+    position:absolute;
+    width:100%;
+    background-color: #00aaaa;
+    height: 40px;
+    line-height: 32px;
+    letter-spacing: 1px;
+    text-align: center;
+    clear: both;
+    bottom: 0;
+    left: 0;
+    right:0;
+}
+
