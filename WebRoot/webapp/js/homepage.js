@@ -5,7 +5,6 @@ $(window).load(function(){
     
     loadProductContent();
     isOnline();
-    //pagination
     pagination();
 });
 
@@ -108,60 +107,10 @@ function loadProductContent(){
     });
 }
 
-function bindClickEventToSelect(option){
-    //bind Click Event to select
-    $.each(option,function(index, value){
-        //console.info("value",value);
-        $(value).bind("click", function (e) {
-            pushPageRequest($(value).text(),dataCountPerPage);
-            //$(value).attr("selected",true);
-            e.stopPropagation();
-        });
-    });
-}
+//set Option element
+function setOptionElement($option,currentPage, maxPage){
 
-//use Ajax to get data of current page
-function pushPageRequest(currentPage, numberPerPage, maxPage){
-    $.ajax({
-        url:"toProductgetHomepageProduct.action",
-        data:{
-            "currentPage":currentPage,
-            "numberPerPage": numberPerPage
-        },
-        dataType:"json",
-        success: function (data, textStatus) {
-
-            //console.info("textStatus", textStatus);
-            if(textStatus==="success"){
-                setOptionElement($("#option_span>select"), currentPage, maxPage);
-                var $prdtDisplay = $(".product_display");
-                var $prdtDetail = $(".product_detail").clone(true);
-                //every time clone prdt_detail div
-                $(".product_display").empty();
-                console.info("Function Empty worked",true);
-                $.each(data.productList,function(index, element){
-                    var $prdtDetailClone = $prdtDetail.clone(true);
-                    var $prdtDetailCloneChildren = $prdtDetailClone.children();
-                    $($prdtDetailCloneChildren[0]).attr("src",element.url);
-                    $($prdtDetailCloneChildren[1]).text(element.description);
-                    $($prdtDetailCloneChildren[2]).html("<i>￥</i>"+element.presentprice);
-                    $prdtDetailClone.appendTo($prdtDisplay);
-                });
-
-            }
-        },
-        error: function (errorCode) {
-            alert("加载分页出现错误，错误代码：" + errorCode);
-        }
-    });
-
-}
-
-//according the maxpage to set the option element
-function setOptionElement(select, currentPage, maxPage){
-    var $option = select.children();    //the option elements
-
-    if(currentPage > maxPage){
+    if(currentPage > maxPage || currentPage <1){
         return false;
     }
 
@@ -173,7 +122,44 @@ function setOptionElement(select, currentPage, maxPage){
         }else{
             $(element).text(pageNumber);
         }
+    });
+    $($option[2]).attr("selected","selected");
+    
+    return true;
+}
 
+//use Ajax to get data of current page
+function pushPageRequest(currentPage, numberPerPage, maxPage){
+    if(currentPage > maxPage || currentPage <1) return false;
+    $.ajax({
+        url:"toProductgetHomepageProduct.action",
+        data:{
+            "currentPage":currentPage,
+            "numberPerPage": numberPerPage
+        },
+        dataType:"json",
+        success: function (data, textStatus) {
+
+            if(textStatus==="success"){
+                setOptionElement($("#option_span option"), currentPage, maxPage);
+                var $prdtDisplay = $(".product_display");
+                var $prdtDetail = $(".product_detail:first").clone(true);
+                //every time clone prdt_detail div
+                $(".product_display").empty();
+                $.each(data.productList,function(index, element){
+                    var $prdtDetailClone =  $prdtDetail.clone(true);
+                    var $prdtDetailCloneChildren = $prdtDetailClone.children();
+                    $($prdtDetailCloneChildren[0]).text(element.productid);
+                    $($prdtDetailCloneChildren[1]).attr("src",element.url);
+                    $($prdtDetailCloneChildren[2]).text(element.description);
+                    $($prdtDetailCloneChildren[3]).html("<i>￥</i>"+element.presentprice);
+                    $prdtDetailClone.appendTo($prdtDisplay);
+                });
+            }
+        },
+        error: function (errorCode) {
+            alert("加载分页出现错误，错误代码：" + errorCode);
+        }
     });
 
 }
@@ -208,7 +194,7 @@ function pagination(){
         var $nextSpan = $("#next_span");
         var $lastSpan = $("#last_span");
 
-        setOptionElement($("#option_span select"), 1, prdtCount);
+        setOptionElement($("#option_span option"), 1, prdtCount);
         pushPageRequest(1,dataCountPerPage,pageCount);
 
         //bind click event
@@ -227,7 +213,16 @@ function pagination(){
             pushPageRequest(pageCount,dataCountPerPage,pageCount);
         });
 
-        bindClickEventToSelect($optionSpan);
+       //bind Click Event to select
+       $.each($optionSpan,function(index, value){
+           //console.info("value",value);
+           $(value).bind("click", function (e) {
+               pushPageRequest($(value).text(),20);
+//            e.stopPropagation();
+               currentPage=parseInt($(value).text());
+               return false;
+           });
+       });
     });
 
 }

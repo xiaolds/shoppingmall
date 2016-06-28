@@ -103,6 +103,8 @@ public class ProductAction extends BaseAction {
 		return "returnJson";
 	}
 	
+//	public String get
+	
 
 	/*******getter && setter**********/
 	public void setCategoryService(CategoryService categoryService) {
