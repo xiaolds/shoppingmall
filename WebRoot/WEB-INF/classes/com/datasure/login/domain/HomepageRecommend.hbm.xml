@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.datasure.login.domain.HomepageRecommend" table="d_homepage_recommend" catalog="shoppingmall">
+        <id name="recommendid" type="java.lang.Integer">
+            <column name="recommendid" />
+            <generator class="native" />
+        </id>
+        <property name="productid" type="java.lang.Integer">
+            <column name="productid" not-null="true">
+                <comment>商品id</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

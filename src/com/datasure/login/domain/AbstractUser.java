@@ -26,6 +26,7 @@ public abstract class AbstractUser implements java.io.Serializable {
 	private Integer userdegree;
 	private Set<Order> Orders = new HashSet<Order>(0);
 	private Set<Address> Addresses = new HashSet<Address>(0);
+	private Set<Shopcar> Shopcars = new HashSet<Shopcar>(0);
 
 	// Constructors
 
@@ -63,7 +64,7 @@ public abstract class AbstractUser implements java.io.Serializable {
 	public AbstractUser(String nickname, String realname, Integer age,
 			String sex, String password, String email, String phone,
 			Timestamp createtime, Timestamp lastlogintime, Integer userdegree,
-			Set<Order> Orders, Set<Address> Addresses
+			Set<Order> Orders, Set<Address> Addresses, Set<Shopcar> Shopcars
 			) {
 		this.nickname = nickname;
 		this.realname = realname;
@@ -77,6 +78,7 @@ public abstract class AbstractUser implements java.io.Serializable {
 		this.userdegree = userdegree;
 		this.Orders = Orders;
 		this.Addresses = Addresses;
+		this.Shopcars = Shopcars;
 	}
 
 	// Property accessors
@@ -183,5 +185,16 @@ public abstract class AbstractUser implements java.io.Serializable {
 	public void setAddresses(Set<Address> Addresses) {
 		this.Addresses = Addresses;
 	}
+
+	public Set<Shopcar> getShopcars() {
+		return Shopcars;
+	}
+
+	public void setShopcars(Set<Shopcar> shopcars) {
+		Shopcars = shopcars;
+	}
+
+
+	
 
 }

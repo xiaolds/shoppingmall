@@ -76,5 +76,15 @@
             </key>
             <one-to-many class="com.datasure.login.domain.Address" />
         </set>
+        
+        <set name="Shopcars" inverse="true">
+            <key>
+                <column name="userid">
+                </column>
+            </key>
+            <one-to-many class="com.datasure.login.domain.Shopcar" />
+        </set>
+        
+        
     </class>
 </hibernate-mapping>

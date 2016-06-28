@@ -61,12 +61,16 @@
             </interceptor-ref>
             <interceptor-ref name="myDefaultStack"></interceptor-ref>
             
-           --></action>
+           -->
+         </action>
         
         <action name="toProduct*" class="com.datasure.login.action.ProductAction" method="{1}">
             
             
         </action>
+        
+        
+        
     
     </package>
 

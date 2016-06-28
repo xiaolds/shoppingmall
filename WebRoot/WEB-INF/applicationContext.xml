@@ -33,6 +33,8 @@
 	           <value>com/datasure/login/domain/Item.hbm.xml</value>
 	           <value>com/datasure/login/domain/Order.hbm.xml</value>
 	           <value>com/datasure/login/domain/Product.hbm.xml</value>
+	           <value>com/datasure/login/domain/Shopcar.hbm.xml</value>
+	           <value>com/datasure/login/domain/HomepageRecommend.hbm.xml</value>
 	        </list>
 	    </property>    
         

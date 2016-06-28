@@ -29,9 +29,10 @@ public class User extends AbstractUser implements java.io.Serializable {
 	/** full constructor */
 	public User(String nickname, String realname, Integer age, String sex,
 			String password, String email, String phone, Timestamp createtime,
-			Timestamp lastlogintime, Integer userdegree,Set<Order> Orders, Set<Address> Addresses) {
+			Timestamp lastlogintime, Integer userdegree,Set<Order> Orders, 
+			Set<Address> Addresses, Set<Shopcar> Shopcares) {
 		super(nickname, realname, age, sex, password, email, phone, createtime,
-				lastlogintime, userdegree,Orders,Addresses);
+				lastlogintime, userdegree,Orders,Addresses,Shopcares);
 	}
 
 }

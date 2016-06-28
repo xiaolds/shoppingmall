@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts2.interceptor.CookiesAware;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 
@@ -16,7 +15,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 public abstract class BaseAction extends ActionSupport implements
-		ServletRequestAware, ServletResponseAware, CookiesAware, Serializable{
+		ServletRequestAware, ServletResponseAware, Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -29,7 +28,6 @@ public abstract class BaseAction extends ActionSupport implements
 	public Map<String, Object> dataMap = new HashMap<String, Object>(0);
 	//用于操作Cookie
 	public CookieUtils cookieUtil = new CookieUtils();
-	public Map<String, String> cookieMap;
 	
 	// 得到Action类的全名
 	protected abstract String getActionClassFullName();
@@ -68,12 +66,4 @@ public abstract class BaseAction extends ActionSupport implements
 		this.actionMsg = actionMsg;
 	}
 	
-	@Override
-	public void setCookiesMap(Map<String, String> cookies) {
-		this.cookieMap = cookies;
-	}
-	
-	public Map<String, String> getCookiesMap(){
-		return cookieMap;
-	}
 }

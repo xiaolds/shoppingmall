@@ -55,11 +55,6 @@ public class UserAction extends BaseAction{
 			Map<String, Object> sessionMap = getSession();
 			sessionMap.put(UserStateSession, getNickName().trim());
 			//同时向客户端添加一条Cookie
-/*//			cookieMap.put(UserStateCookie, getNickName().trim());
-			if(cookieMap.containsKey(UserStateCookie)){
-				Cookie c = cookieMap.get(UserStateCookie);
-			}*/
-			
 			Cookie c = cookieUtil.getCookie(request, UserStateCookie);
 			
 			if(null == c){
@@ -85,29 +80,11 @@ public class UserAction extends BaseAction{
 	public String logout() throws Exception {
 		
 		//使对应的Session无效
-		String name = getNickName();
 		Map<String, Object> sessions = getSession();
-		
-		@SuppressWarnings("unchecked")
-		Map<String ,String> usrMap = 
-			(Map<String, String>) sessions.get(UserStateSession);
+
 		//删除对应名称的Session
-		Set<Entry<String, String>> set = usrMap.entrySet();
-		boolean isLogout = false;
-		for(Entry<String, String> entry: set){
-			
-			if(entry.getValue().equals(name)){
-				usrMap.remove(entry.getKey());	//删除对应用户
-				isLogout = true;
-				dataMap.put(UserStateCode, UserState.LOGOUT);	//正常退出
-			}
-			
-		}
-		
-		if(!isLogout){
-			dataMap.put(UserStateCode, UserState.NO_SUCH_USER);
-		}
-		
+		sessions.remove(UserStateSession);
+		dataMap.put(UserStateCode, UserState.LOGOUT);
 		return "returnJson";
 	}
 	
@@ -134,6 +111,7 @@ public class UserAction extends BaseAction{
 	
 	
 	/***用户查询方法*****/
+	//使用姓名查询用户
 	public String findUserByNickName() throws Exception{
 		
 		User user = userService.getUser("nickname", getNickName());
@@ -148,6 +126,7 @@ public class UserAction extends BaseAction{
 		return "returnJson";
 	}
 	
+	//使用电话号码查询用户
 	public String findUserByPhoneNumber() throws Exception {
 		
 		User user = userService.getUser("phone", getMobilePhone());
@@ -164,6 +143,7 @@ public class UserAction extends BaseAction{
 		return "returnJson";
 	}
 	
+	//使用Email查询用户
 	public String findUserByEmail() throws Exception {
 		
 		User user = userService.getUser("email", getEmail());
@@ -184,15 +164,21 @@ public class UserAction extends BaseAction{
 		
 		//获取Session判断用户状态
 		Map<String, Object> sessions = getSession();
-		String userName = (String) sessions.get(getNickName().trim());
+		String userName = (String) sessions.get(UserStateSession);
 		
-		if(null == userName){
+		if(getNickName()==null || userName==null){
 			//用户不在线
 			dataMap.put(UserStateCode, UserState.OUTLINE);
+			return "returnJson";
 		}
-		else{
+		
+		if(userName.equals(getNickName())){
 			//用户存在
 			dataMap.put(UserStateCode, UserState.ONLINE);
+		}
+		else{
+			//用户不在线
+			dataMap.put(UserStateCode, UserState.OUTLINE);
 		}
 		
 		return "returnJson";

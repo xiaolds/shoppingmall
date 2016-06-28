@@ -3,8 +3,6 @@ package com.datasure.login.util;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-import com.datasure.login.action.UserAction;
-
 public class CookieUtils {
 	
 //	public static final String USER_COOKIE = "user.cookie";

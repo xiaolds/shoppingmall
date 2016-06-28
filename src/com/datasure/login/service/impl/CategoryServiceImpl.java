@@ -3,6 +3,8 @@ package com.datasure.login.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+
 import com.datasure.login.dao.CategoryDao;
 import com.datasure.login.domain.Category;
 import com.datasure.login.service.CategoryService;
@@ -12,7 +14,7 @@ public class CategoryServiceImpl implements CategoryService {
 	private CategoryDao categoryDao;
 	
 	@Override
-	public List<Category> getCategoryByGrade(int grade) {
+	public List<Category> getCategoryByGrade(int grade) throws DataAccessException{
 
 		//调用categoryDao获取目录
 		List<Category> list = new ArrayList<Category>();

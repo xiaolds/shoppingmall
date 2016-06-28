@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.datasure.login.domain.Category" table="d_category" catalog="shoppingmall">
+    <class name="com.datasure.login.domain.Category" table="d_category" catalog="shoppingmall" >
         <id name="categoryid" type="java.lang.Integer">
             <column name="categoryid" />
             <generator class="native" />
@@ -39,10 +39,7 @@
                     <comment>商品种类id</comment>
                 </column>
             </key>
-            <!--<index>
-                <column name="productid"></column>
-            </index>
-            --><one-to-many class="com.datasure.login.domain.Product" />
+            <one-to-many class="com.datasure.login.domain.Product" />
         </set>
     </class>
 </hibernate-mapping>

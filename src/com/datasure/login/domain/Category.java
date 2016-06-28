@@ -1,8 +1,9 @@
 package com.datasure.login.domain;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
+
+import org.apache.struts2.json.annotations.JSON;
 
 /**
  * DCategory entity. @author MyEclipse Persistence Tools
@@ -18,7 +19,7 @@ public class Category implements java.io.Serializable {
 	private Integer categorygrade;
 	private String categorydesc;
 	private String url;
-	private Set<Product> Products = new HashSet<Product>();
+	private Set<Product> Products = new HashSet<Product>(0);
 
 	// Constructors
 
@@ -88,7 +89,8 @@ public class Category implements java.io.Serializable {
 	public void setCategorydesc(String categorydesc) {
 		this.categorydesc = categorydesc;
 	}
-
+	
+	@JSON(serialize=false)
 	public Set<Product> getProducts() {
 		return Products;
 	}
@@ -97,9 +99,6 @@ public class Category implements java.io.Serializable {
 		Products = products;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 
 	@Override
 	public int hashCode() {

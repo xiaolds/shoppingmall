@@ -40,6 +40,14 @@ div{display: block;}
     right:10px;
 }
 
+.login_status a{
+    text-decoration: none;
+}
+
+.link_regist:link{
+    color:#ffffff;
+}
+
 /**inner*/
 .body_wrap{
     background-color: #d3dce1;
@@ -137,7 +145,6 @@ li{
 
 /**footer*/
 .shopping_footer{
-
     position:absolute;
     width:100%;
     background-color: #00aaaa;
@@ -151,4 +158,8 @@ li{
     left: 0;
     right:0;
 }
-
+.pagination{
+    position:fixed;
+    bottom:39px;
+    height:40px;
+}
