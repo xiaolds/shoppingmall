@@ -58,13 +58,19 @@
 	class="com.datasure.login.service.impl.UserServiceImpl" p:userDao-ref="userDao"/>
 	<bean id="categoryService"
 	class="com.datasure.login.service.impl.CategoryServiceImpl" p:categoryDao-ref="categoryDao"/>
-	
+	<bean id="homepageRecommendService"
+	class="com.datasure.login.service.impl.HomepageRecommendServiceImpl" p:homepageRecommendDao-ref="homepageRecommendDao"/>
+	<bean id="productService"
+	class="com.datasure.login.service.impl.ProductServiceImpl" p:productDao-ref="productDao"/>
 	
     <!-- 以下为所有Dao类 -->	
     <bean id="userDao" 
     class="com.datasure.login.dao.impl.UserDaoImpl" p:sessionFactory-ref="sessionFactory"/>
 	<bean id="categoryDao"
 	class="com.datasure.login.dao.impl.CategoryDaoImpl" p:sessionFactory-ref="sessionFactory"/>
-
+    <bean id="homepageRecommendDao"
+    class="com.datasure.login.dao.impl.HomepageRecommendDaoImpl" p:sessionFactory-ref="sessionFactory"/>
+    <bean id="productDao"
+    class="com.datasure.login.dao.impl.ProductDaoImpl" p:sessionFactory-ref="sessionFactory"/>
 
 </beans>

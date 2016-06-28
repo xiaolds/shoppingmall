@@ -16,6 +16,31 @@ public class ProductDaoImpl extends BaseDaoHibernate3<Product>
 		return find(hql);
 	}
 
+	@Override
+	public List<Product> getProduct(int... productId) {
+		
+		//根据数组长度来拼接HQL语句
+		int len = productId.length;
+		StringBuilder sb = new StringBuilder();
+		
+		
+		if(0 != len){
+			sb.append("select p from Product p where p.productid=");
+			sb.append(productId[0]+" ");
+			for(int i = 1; i < len; i++){
+				
+				sb.append("or p.productid =");
+				sb.append(productId[i]+" ");
+				
+				
+			}	//end of for
+//			sb.append(";");
+		}	//end of if
+		System.out.println("Product Hql:"+sb);
+		
+		return find(sb.toString());
+	}
+
 	
 
 }

@@ -17,7 +17,7 @@ public class HomepageRecommendDaoImpl extends
 	public List<HomepageRecommend> getHomePageRecommend(int page, int pageSize)
 			throws DataAccessException {
 		
-		String hql = "select * from HomepageRecommend";
+		String hql = "select h from HomepageRecommend h";
 		List<HomepageRecommend> prdtList = findByPage(hql, page, pageSize);
 		return prdtList;
 	}

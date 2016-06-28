@@ -3,8 +3,10 @@ package com.datasure.login.action;
 import java.util.List;
 import com.datasure.login.domain.Category;
 import com.datasure.login.domain.HomepageRecommend;
+import com.datasure.login.domain.Product;
 import com.datasure.login.service.CategoryService;
 import com.datasure.login.service.HomepageRecommendService;
+import com.datasure.login.service.ProductService;
 
 
 /**
@@ -20,6 +22,7 @@ public class ProductAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 	private CategoryService categoryService;
 	private HomepageRecommendService homepageRecommendService;
+	private ProductService productService;
 	
 	/**
 	 * 
@@ -59,11 +62,27 @@ public class ProductAction extends BaseAction {
 			homepageRecommendService.getHomepageRecommend(page, pageSize);
 		
 		//从homepageRecommend中获取prdt
+		//将查询出来的Produtid组成数组
+		int[] productid = new int[list.size()];
+		
+		for(int i = 0; i < productid.length; ++i){
+			productid[i] = list.get(i).getProductid();
+		}
+		
+		List<Product> prdtList = productService.getProduct(productid);
+		dataMap.put("productList", prdtList);
 		
 		
 		return "returnJson";
 	}
 	
+	/**
+	 * 
+	 * getHomepageProductCount:(获取首页推荐商品数量). <br/>
+	 * @author LiDongSheng
+	 * @return
+	 * @throws Exception
+	 */
 	public String getHomepageProductCount() throws Exception {
 		long count = homepageRecommendService.getHomepageRecommendCount();
 		dataMap.put("prdtCount", count);
@@ -93,6 +112,11 @@ public class ProductAction extends BaseAction {
 	public void setHomepageRecommendService(
 			HomepageRecommendService homepageRecommendService) {
 		this.homepageRecommendService = homepageRecommendService;
+	}
+	
+
+	public void setProductService(ProductService productService) {
+		this.productService = productService;
 	}
 
 	@Override

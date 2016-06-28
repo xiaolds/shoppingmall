@@ -17,4 +17,13 @@ public interface ProductDao extends BaseDao<Product> {
 	 */
 	public List<Product> getProduct(String key, String value);
 	
+	/**
+	 * 
+	 * getProduct:(根据id批量获取商品). <br/>
+	 * @author LiDongSheng
+	 * @param productId
+	 * @return
+	 */
+	public List<Product> getProduct(int...productId);
+	
 }

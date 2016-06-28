@@ -143,6 +143,14 @@ li{
     text-align: center;
 }
 
+.prdt_price{
+    float:left;
+}
+
+.prdt_get{
+    position:relative;
+}
+
 /**footer*/
 .shopping_footer{
     position:absolute;
