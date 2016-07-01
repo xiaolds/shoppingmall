@@ -42,9 +42,9 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public void saveProductToShopcar(Shopcar shopcar) {
-		//第一步，从Cookie中查询商品是否已经存在
+		//第一步，查询商品是否已经存在
 		Shopcar shop = 
-			shopcarDao.getProcuctFromShopcar(shopcar.getUser().getId(),
+			shopcarDao.getProcuctFromShopcar(shopcar.getUser(),
 					shopcar.getProductid());
 		
 		if(shop != null){
@@ -93,8 +93,7 @@ public class ProductServiceImpl implements ProductService {
 		
 		User user = null;
 		try{
-			//TODO
-			user = userService.getUserNameFromSession();
+			user = userService.getUserFromSession();
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -112,7 +111,19 @@ public class ProductServiceImpl implements ProductService {
 				prdtNum = Integer.valueOf(cValue);
 				//构造 Shopcar
 				Shopcar s = new Shopcar(user, prdtId, prdtNum);
-				shopcarDao.saveProductToShopcar(s);
+				//从数据库中获取该shopcar
+				Shopcar ss = shopcarDao.getProcuctFromShopcar(s);
+				
+				if(null != ss){
+					//数据库中存在该记录，刷新
+					ss.setProductnum(ss.getProductnum()+s.getProductnum());
+					shopcarDao.updateProductInShopcar(ss);
+				}
+				else{
+					//不存在直接创建
+					shopcarDao.saveProductToShopcar(s);
+				}
+				
 				//删除该Cookie
 				util.delCookie(request, cName);
 			}
@@ -139,6 +150,11 @@ public class ProductServiceImpl implements ProductService {
 	public void setShopcarDao(ShopcarDao shopcarDao) {
 		this.shopcarDao = shopcarDao;
 	}
+	@Resource
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+	
 	
 /*	@Resource
 	public void setUserDao(UserDao userDao) {

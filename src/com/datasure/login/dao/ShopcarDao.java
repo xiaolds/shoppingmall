@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.datasure.login.domain.Shopcar;
+import com.datasure.login.domain.User;
 
 
 /**
@@ -46,7 +47,19 @@ public interface ShopcarDao {
 	 * @return： 返回Null 如果没有对应的商品的话
 	 * @throws DataAccessException
 	 */
-	public Shopcar getProcuctFromShopcar(int userId, int productId)
+	public Shopcar getProcuctFromShopcar(User user, int productId)
+						throws DataAccessException;
+	
+	/**
+	 * 
+	 * getProcuctFromShopcar:(通过Shopcar对象查询商品). <br/>
+	 * @author LiDongSheng
+	 * @param userId
+	 * @param productId
+	 * @return： 返回Null 如果没有对应的商品的话
+	 * @throws DataAccessException
+	 */
+	public Shopcar getProcuctFromShopcar(Shopcar shopcar)
 						throws DataAccessException;
 	
 	/**

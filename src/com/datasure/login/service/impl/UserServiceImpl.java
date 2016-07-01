@@ -53,34 +53,35 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User getUserNameFromSession()
-			throws DataAccessException {
+	public boolean isOnline() {
+		Map<String, Object> sessionMap = 
+			ActionContext.getContext().getSession();
+		String nickName = (String) sessionMap.get(UserAction.UserStateSession);
+		
+		if(null != nickName){
+			return true;
+		}
+		return false;
+	}
+	
+	
+	@Override
+	public User getUserFromSession() {
 
 		Map<String, Object> sessionMap = 
 			ActionContext.getContext().getSession();
+		String nickName = (String) sessionMap.get(UserAction.UserStateSession);
 		
-		String name = (String) sessionMap.get(UserAction.UserStateSession);
-		if(null != name){
-			//∑µªÿ”√ªß
-			return userDao.getUser("nickname", name);
-		}
-		else{
-			return null;
-		}
-		
+		return this.getUser("nickname", nickName);
 	}
 
-
-	
-	
-	
-	
-	
 	/****** getter && setter****/
 	@Resource
 	public void setUserDao(UserDao userDao) throws DataAccessException {
 		this.userDao = userDao;
 	}
+
+	
 
 
 

@@ -198,7 +198,7 @@ function pagination(){
         var prdtCount = 0;
 
         prdtCount = data.prdtCount;
-        console.info("product count",prdtCount);
+        //console.info("product count",prdtCount);
 
         //get the page number
         var dataCountPerPage = 20;
@@ -209,7 +209,7 @@ function pagination(){
         else{
             pageCount = parseInt(prdtCount/dataCountPerPage)+1;
         }
-        console.info("pageCount", pageCount);
+        //console.info("pageCount", pageCount);
 
         //get Dom
         var $firstSpan = $("#first_span");

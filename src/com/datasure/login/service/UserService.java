@@ -46,14 +46,22 @@ public interface UserService {
 	
 	/**
 	 * 
-	 * getUserNameFromSession:(从Session中获取用户姓名). <br/>
+	 * isOnline:(通过Session判断用户是否在线). <br/>
+	 * @author LiDongSheng
+	 * @return
+	 */
+	public boolean isOnline();
+	
+	/**
+	 * 
+	 * getUserFromSession:(通过Session获取当前的user). <br/>
+	 * TODO(这里描述这个方法适用条件 – 可选).<br/>
+	 * TODO(这里描述这个方法的执行流程 – 可选).<br/>
+	 * TODO(这里描述这个方法的使用方法 – 可选).<br/>
+	 * TODO(这里描述这个方法的注意事项 – 可选).<br/>
 	 *
 	 * @author LiDongSheng
-	 * @param nickName
 	 * @return
-	 * @throws DataAccessException
 	 */
-	public User getUserNameFromSession() 
-				throws DataAccessException;
-	
+	public User getUserFromSession();
 }

@@ -50,10 +50,6 @@ public interface ProductService {
 	/**
 	 * 
 	 * getAndSaveProductFromCookie:(从Cookie中获取商品信息并且持久化). <br/>
-	 * TODO(这里描述这个方法适用条件 – 可选).<br/>
-	 * TODO(这里描述这个方法的执行流程 – 可选).<br/>
-	 * TODO(这里描述这个方法的使用方法 – 可选).<br/>
-	 * TODO(这里描述这个方法的注意事项 – 可选).<br/>
 	 *
 	 * @author LiDongSheng
 	 * @param request

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.datasure.common.dao.impl.BaseDaoHibernate3;
 import com.datasure.login.dao.ShopcarDao;
 import com.datasure.login.domain.Shopcar;
+import com.datasure.login.domain.User;
 
 
 @Repository("shopcarDao")
@@ -17,7 +18,11 @@ public class ShopcarDaoImpl extends BaseDaoHibernate3<Shopcar> implements
 	@Override
 	public void saveProductToShopcar(Shopcar shop) throws DataAccessException {
 		//直接保存用户的商品
-		save(shop);
+		try{
+			save(shop);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -40,16 +45,31 @@ public class ShopcarDaoImpl extends BaseDaoHibernate3<Shopcar> implements
 	}
 
 	@Override
-	public Shopcar getProcuctFromShopcar(int userId, int productId)
+	public Shopcar getProcuctFromShopcar(User user, int productId)
 			throws DataAccessException {
-		String hql = "select s from Shopcar s where userid= "+
-					userId + " and where productid= "+productId;
+		String hql = "select s from Shopcar s where s.user="+
+					user + " and s.productid="+productId;
 		List<Shopcar> shopcarList = find(hql);
 		
 		if(0 != shopcarList.size()){
 			return shopcarList.get(0);
 		}
 		
+		return null;
+	}
+
+	@Override
+	public Shopcar getProcuctFromShopcar(Shopcar shopcar)
+			throws DataAccessException {
+		
+		String hql = "select s from Shopcar s where s.user = " + 
+					shopcar.getUser()+" and s.productid" +
+					shopcar.getProductid();
+		
+		List<Shopcar> shopList = find(hql);
+		if(0 != shopList.size()){
+			return shopList.get(0);
+		}
 		return null;
 	}
 

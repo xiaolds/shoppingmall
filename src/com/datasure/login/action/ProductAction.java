@@ -126,23 +126,20 @@ public class ProductAction extends BaseAction {
 	public String putProductToShopCar() throws Exception {
 		
 		//获取前台数据
-		String userName = request.getParameter("nickName");
+//		String userName = request.getParameter("nickName");
 		int productId = Integer.valueOf(request.getParameter("productid"));
 		int productNum = Integer.valueOf(request.getParameter("productnum"));
 		
 		//判断用户在线与否
 		boolean isOnline = false;
-		Map<String, Object> sessionMap = getSession();
-		String userNameFromSession = (String) sessionMap.get(UserAction.UserStateSession);
 		
-		if(userName!=null && userNameFromSession!=null 
-				&& userName.equals(userNameFromSession)){
+		if(userService.isOnline()){
 			isOnline = true;
 		}
 		
 		if(isOnline){
 			//用户在线，直接将商品添加到用户的默认购物车中
-			User user = userService.getUser("nickname", userName);
+			User user = userService.getUserFromSession();
 			Shopcar shopcar = new Shopcar(user, productId, productNum);
 			productService.saveProductToShopcar(shopcar);
 		}
@@ -154,7 +151,7 @@ public class ProductAction extends BaseAction {
 		return "returnJson";
 	}
 	
-	
+	//TODO
 	static int i = 1;
 	public String test() throws Exception {
 		

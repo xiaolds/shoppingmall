@@ -29,6 +29,8 @@ public class CookieUtils {
 					 //É¾³ý
 					 c.setValue("");
 					 c.setMaxAge(0);
+					 c.setPath("shoppingmall");
+					 break;
 				 }
 			}
 		}
