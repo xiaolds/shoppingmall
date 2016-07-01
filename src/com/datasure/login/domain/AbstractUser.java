@@ -34,6 +34,11 @@ public abstract class AbstractUser implements java.io.Serializable {
 	public AbstractUser() {
 	}
 	
+	public AbstractUser(Integer userid) {
+		this.id = userid;
+	}
+	
+	
 	
 
 	public AbstractUser(String nickname, String realname, Integer age,

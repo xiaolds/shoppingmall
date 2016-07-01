@@ -5,15 +5,25 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.stereotype.Repository;
 
 import com.datasure.common.dao.BaseDao;
 
+@Repository("baseDao")
 public class BaseDaoHibernate3<T> extends HibernateDaoSupport
-implements BaseDao<T>
+							implements BaseDao<T>
 {
+	
+	@Autowired(required=true)
+	public void setMySessionFactory(SessionFactory sessionFactory){
+		super.setSessionFactory(sessionFactory);
+	}
+	
 	// 根据ID加载实体
 	public T get(Class<T> entityClazz, Serializable id) 
 				throws DataAccessException
@@ -144,4 +154,5 @@ implements BaseDao<T>
 		});
 		return list;
 	}
+
 }

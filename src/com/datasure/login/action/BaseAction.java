@@ -9,11 +9,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import com.datasure.login.util.CookieUtils;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+@Scope("singleton")
+@Controller("baseAction")
 public abstract class BaseAction extends ActionSupport implements
 		ServletRequestAware, ServletResponseAware, Serializable{
 

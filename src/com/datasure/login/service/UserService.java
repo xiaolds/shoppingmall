@@ -44,5 +44,16 @@ public interface UserService {
 	 */
 	public User getUser(String key, String value) throws DataAccessException;
 	
+	/**
+	 * 
+	 * getUserNameFromSession:(从Session中获取用户姓名). <br/>
+	 *
+	 * @author LiDongSheng
+	 * @param nickName
+	 * @return
+	 * @throws DataAccessException
+	 */
+	public User getUserNameFromSession() 
+				throws DataAccessException;
 	
 }

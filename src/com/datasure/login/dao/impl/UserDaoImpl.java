@@ -5,11 +5,14 @@ package com.datasure.login.dao.impl;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
 
 import com.datasure.common.dao.impl.BaseDaoHibernate3;
 import com.datasure.login.dao.UserDao;
 import com.datasure.login.domain.User;
 
+
+@Repository("userDao")
 public class UserDaoImpl extends BaseDaoHibernate3<User> 
 									implements UserDao{
 	//使用SessionFactory进行数据库查询个工作

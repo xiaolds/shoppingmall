@@ -153,6 +153,9 @@ function pushPageRequest(currentPage, numberPerPage, maxPage){
                     $($prdtDetailCloneChildren[1]).attr("src",element.url);
                     $($prdtDetailCloneChildren[2]).text(element.description);
                     $($prdtDetailCloneChildren[3]).html("<i>￥</i>"+element.presentprice);
+                    //add Event to every Button
+                    purchase($prdtDetailCloneChildren[4]);
+//                    console.info($prdtDetailCloneChildren[4]);
                     $prdtDetailClone.appendTo($prdtDisplay);
                 });
             }
@@ -162,6 +165,27 @@ function pushPageRequest(currentPage, numberPerPage, maxPage){
         }
     });
 
+}
+
+function purchase(btn){
+    $(btn).click(function () {
+        //jQuery.post(url,data,success(data, textStatus, jqXHR),dataType)
+        var $prdtDetailChildren = $(btn).parent(".product_detail").children();
+        var productId = $($prdtDetailChildren[0]).text();
+        var productNum = 1;
+        var userName = $.cookie("UserStateCookie");//TODO
+        //console.info("parent",$prdtDetail);
+        $.post("toProductputProductToShopCar.action",
+            {"nickName":userName,
+            "productid":productId,
+            "productnum":productNum},
+            function (data, textStatus) {
+                if("success" === textStatus){
+                    alert("添加到购物车");
+                }
+        },"json");
+        
+    });
 }
 
 

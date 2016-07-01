@@ -1,10 +1,15 @@
 package com.datasure.login.service.impl;
 
-import org.springframework.dao.DataAccessException;
+import java.util.Map;
 
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+
+import com.datasure.login.action.UserAction;
 import com.datasure.login.dao.UserDao;
 import com.datasure.login.domain.User;
 import com.datasure.login.service.UserService;
+import com.opensymphony.xwork2.ActionContext;
 
 
 /**
@@ -15,6 +20,8 @@ import com.datasure.login.service.UserService;
  * @author LiDongSheng
  * @version
  */
+
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
 	private UserDao userDao;
@@ -42,9 +49,26 @@ public class UserServiceImpl implements UserService {
 		
 		return userDao.getUser(key, value);
 	}
-
-
 	
+	@Override
+	public User getUserNameFromSession()
+			throws DataAccessException {
+
+		Map<String, Object> sessionMap = 
+			ActionContext.getContext().getSession();
+		
+		String name = (String) sessionMap.get(UserAction.UserStateSession);
+		if(null != name){
+			//∑µªÿ”√ªß
+			return userDao.getUser("nickname", name);
+		}
+		else{
+			return null;
+		}
+		
+	}
+
+
 	
 	
 	
@@ -55,6 +79,10 @@ public class UserServiceImpl implements UserService {
 	public void setUserDao(UserDao userDao) throws DataAccessException {
 		this.userDao = userDao;
 	}
+
+
+
+
 
 
 

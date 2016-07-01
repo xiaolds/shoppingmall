@@ -1,14 +1,7 @@
 package com.datasure.login.domain;
 
-/**
- * DShopcar entity. @author MyEclipse Persistence Tools
- */
-
 public class Shopcar implements java.io.Serializable {
 
-	/**
-	 * serialVersionUID:TODO(用一句话描述这个变量表示什么).
-	 */
 	private static final long serialVersionUID = 1L;
 	// Fields
 
@@ -18,7 +11,6 @@ public class Shopcar implements java.io.Serializable {
 	private Integer productnum;
 
 	// Constructors
-
 	/** default constructor */
 	public Shopcar() {
 	}
@@ -63,5 +55,14 @@ public class Shopcar implements java.io.Serializable {
 	public void setProductnum(Integer productnum) {
 		this.productnum = productnum;
 	}
+
+	@Override
+	public String toString() {
+		return "Shopcar [shopcarid=" + shopcarid + ", Userid=" + User.getId()
+				+ ", productid=" + productid + ", productnum=" + productnum
+				+ "]";
+	}
+	
+	
 
 }

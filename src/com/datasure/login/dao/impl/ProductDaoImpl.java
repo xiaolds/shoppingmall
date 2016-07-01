@@ -2,10 +2,13 @@ package com.datasure.login.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.datasure.common.dao.impl.BaseDaoHibernate3;
 import com.datasure.login.dao.ProductDao;
 import com.datasure.login.domain.Product;
 
+@Repository("productDao")
 public class ProductDaoImpl extends BaseDaoHibernate3<Product>
 								implements ProductDao {
 

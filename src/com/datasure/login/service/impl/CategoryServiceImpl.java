@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import com.datasure.login.dao.CategoryDao;
 import com.datasure.login.domain.Category;
 import com.datasure.login.service.CategoryService;
 
+@Service("categoryService")
 public class CategoryServiceImpl implements CategoryService {
 
 	private CategoryDao categoryDao;

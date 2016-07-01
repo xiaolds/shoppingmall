@@ -2,14 +2,14 @@ package com.datasure.login.action;
 
 
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import javax.servlet.http.Cookie;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Controller;
 
 import com.datasure.login.domain.User;
+import com.datasure.login.service.ProductService;
 import com.datasure.login.service.UserService;
 import com.datasure.login.util.UserState;
 
@@ -20,7 +20,7 @@ import com.datasure.login.util.UserState;
  * @author LiDongSheng
  * @version
  */
-
+@Controller("userAction")
 public class UserAction extends BaseAction{
 	
 	private static final long serialVersionUID = 1L;
@@ -39,6 +39,7 @@ public class UserAction extends BaseAction{
 	
 	//系统所用业务处理逻辑
 	private UserService userService;
+	private ProductService productService;
 	
 	
 	//登陆
@@ -54,6 +55,13 @@ public class UserAction extends BaseAction{
 			//登陆成功后添加一条session
 			Map<String, Object> sessionMap = getSession();
 			sessionMap.put(UserStateSession, getNickName().trim());
+			
+			
+			//将缓存的Cookie持久化
+			productService.getAndSaveProductFromCookie(request,
+					response, cookieUtil);
+			
+			
 			//同时向客户端添加一条Cookie
 			Cookie c = cookieUtil.getCookie(request, UserStateCookie);
 			
@@ -66,6 +74,8 @@ public class UserAction extends BaseAction{
 			}
 			
 			response.addCookie(c);
+			
+			response.flushBuffer();
 			
 		}else{
 			//登陆失败
@@ -248,6 +258,11 @@ public class UserAction extends BaseAction{
 
 	public void setMobilePhone(String mobilePhone) {
 		this.mobilePhone = mobilePhone;
+	}
+	
+
+	public void setProductService(ProductService productService) {
+		this.productService = productService;
 	}
 
 	@Override

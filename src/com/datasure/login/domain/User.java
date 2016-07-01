@@ -14,6 +14,10 @@ public class User extends AbstractUser implements java.io.Serializable {
 	/** default constructor */
 	public User() {
 	}
+	
+	public User(Integer userid) {
+		super(userid);
+	}
 
 	public User(String nickname, String realname, Integer age, String sex,
 			String password, String email, String phone) {

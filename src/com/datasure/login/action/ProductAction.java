@@ -1,12 +1,21 @@
 package com.datasure.login.action;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.Cookie;
+
+import org.springframework.stereotype.Controller;
+
 import com.datasure.login.domain.Category;
 import com.datasure.login.domain.HomepageRecommend;
 import com.datasure.login.domain.Product;
+import com.datasure.login.domain.Shopcar;
+import com.datasure.login.domain.User;
 import com.datasure.login.service.CategoryService;
 import com.datasure.login.service.HomepageRecommendService;
 import com.datasure.login.service.ProductService;
+import com.datasure.login.service.UserService;
 
 
 /**
@@ -17,12 +26,14 @@ import com.datasure.login.service.ProductService;
  * @author LiDongSheng
  * @version
  */
+@Controller("productAction")
 public class ProductAction extends BaseAction {
 
 	private static final long serialVersionUID = 1L;
 	private CategoryService categoryService;
 	private HomepageRecommendService homepageRecommendService;
 	private ProductService productService;
+	private UserService userService;
 	
 	/**
 	 * 
@@ -103,7 +114,57 @@ public class ProductAction extends BaseAction {
 		return "returnJson";
 	}
 	
-//	public String get
+	/**
+	 * 
+	 * putProductToShopCar:(将商品添加至购物车). <br/>
+	 * (通过判断用户是否在线在执行不同的流程，在线则直接持久化到对应用户的购物车中，
+	 * 不在线则发送到Cookie中).<br/>
+	 * @author LiDongSheng
+	 * @return
+	 * @throws Exception
+	 */
+	public String putProductToShopCar() throws Exception {
+		
+		//获取前台数据
+		String userName = request.getParameter("nickName");
+		int productId = Integer.valueOf(request.getParameter("productid"));
+		int productNum = Integer.valueOf(request.getParameter("productnum"));
+		
+		//判断用户在线与否
+		boolean isOnline = false;
+		Map<String, Object> sessionMap = getSession();
+		String userNameFromSession = (String) sessionMap.get(UserAction.UserStateSession);
+		
+		if(userName!=null && userNameFromSession!=null 
+				&& userName.equals(userNameFromSession)){
+			isOnline = true;
+		}
+		
+		if(isOnline){
+			//用户在线，直接将商品添加到用户的默认购物车中
+			User user = userService.getUser("nickname", userName);
+			Shopcar shopcar = new Shopcar(user, productId, productNum);
+			productService.saveProductToShopcar(shopcar);
+		}
+		else{
+			//用户不在线，将商品保存在Cookie中
+			productService.saveProductToCookies(request, response, cookieUtil);
+		}
+		response.flushBuffer();
+		return "returnJson";
+	}
+	
+	
+	static int i = 1;
+	public String test() throws Exception {
+		
+		Cookie c = cookieUtil.createCookie("test", "test" + i++);
+		response.addCookie(c);
+		
+		
+		return "returnJson";
+		
+	}
 	
 
 	/*******getter && setter**********/
@@ -116,9 +177,13 @@ public class ProductAction extends BaseAction {
 		this.homepageRecommendService = homepageRecommendService;
 	}
 	
-
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
+	}
+	
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
 	}
 
 	@Override

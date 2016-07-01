@@ -3,13 +3,17 @@ package com.datasure.login.dao.impl;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Repository;
 
 import com.datasure.common.dao.impl.BaseDaoHibernate3;
 import com.datasure.login.dao.CategoryDao;
 import com.datasure.login.domain.Category;
 
+@Repository("categoryDao")
 public class CategoryDaoImpl extends BaseDaoHibernate3<Category> 
 										implements CategoryDao {
+	
+	
 
 	@Override
 	public List<Category> getCategory(String hql) throws DataAccessException{
@@ -23,6 +27,6 @@ public class CategoryDaoImpl extends BaseDaoHibernate3<Category>
 		return categoryList;
 	}
 
-
+	
 
 }
