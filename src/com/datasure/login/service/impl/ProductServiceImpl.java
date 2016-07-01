@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.datasure.login.dao.ProductDao;
 import com.datasure.login.dao.ShopcarDao;
-import com.datasure.login.dao.UserDao;
 import com.datasure.login.domain.Product;
 import com.datasure.login.domain.Shopcar;
 import com.datasure.login.domain.User;

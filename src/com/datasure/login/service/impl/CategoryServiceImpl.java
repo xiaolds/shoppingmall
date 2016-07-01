@@ -3,6 +3,8 @@ package com.datasure.login.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +31,7 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	
 	/** getter && setter ***/
-	
+	@Resource
 	public void setCategoryDao(CategoryDao categoryDao) {
 		this.categoryDao = categoryDao;
 	}

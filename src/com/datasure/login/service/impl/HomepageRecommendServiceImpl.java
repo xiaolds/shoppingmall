@@ -2,6 +2,8 @@ package com.datasure.login.service.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +24,7 @@ public class HomepageRecommendServiceImpl implements HomepageRecommendService {
 	}
 
 	/******getter & setter***/
-	
+	@Resource
 	public void setHomepageRecommendDao(HomepageRecommendDao homepageRecommendDao) {
 		this.homepageRecommendDao = homepageRecommendDao;
 	}

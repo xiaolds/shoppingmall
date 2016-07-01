@@ -2,6 +2,8 @@ package com.datasure.login.service.impl;
 
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -75,7 +77,7 @@ public class UserServiceImpl implements UserService {
 	
 	
 	/****** getter && setter****/
-
+	@Resource
 	public void setUserDao(UserDao userDao) throws DataAccessException {
 		this.userDao = userDao;
 	}
