@@ -205,7 +205,7 @@ public class UserAction extends BaseAction{
 			return "login";
 		}
 		
-		dataMap.put("productList", prdtList);
+		dataMap.put("data", prdtList);
 		
 		return "returnJson";
 	}
