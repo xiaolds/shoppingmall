@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.datasure.login.domain.Product;
 import com.datasure.login.domain.Shopcar;
+import com.datasure.login.domain.User;
 import com.datasure.login.util.CookieUtils;
 
 public interface ProductService {
@@ -58,4 +59,13 @@ public interface ProductService {
 	 */
 	public void getAndSaveProductFromCookie(HttpServletRequest request, 
 			HttpServletResponse response, CookieUtils util);
+	
+	/**
+	 * 
+	 * getProductFromShopcart:(通过用户名查找对应的购物车中的商品). <br/>
+	 * @author LiDongSheng
+	 * @param nickname
+	 * @return
+	 */
+	public List<Product> getProductFromShopcart();
 }

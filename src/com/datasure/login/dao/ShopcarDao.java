@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
+import com.datasure.login.domain.Product;
 import com.datasure.login.domain.Shopcar;
 import com.datasure.login.domain.User;
 
@@ -82,6 +83,7 @@ public interface ShopcarDao {
 	 */
 	public void delProductFromShopcar(Shopcar shopcar)
 				throws DataAccessException;
+	
 	
 	
 }

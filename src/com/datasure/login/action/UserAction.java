@@ -1,6 +1,7 @@
 package com.datasure.login.action;
 
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -8,6 +9,7 @@ import javax.servlet.http.Cookie;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 
+import com.datasure.login.domain.Product;
 import com.datasure.login.domain.User;
 import com.datasure.login.service.ProductService;
 import com.datasure.login.service.UserService;
@@ -190,6 +192,20 @@ public class UserAction extends BaseAction{
 			//用户不在线
 			dataMap.put(UserStateCode, UserState.OUTLINE);
 		}
+		
+		return "returnJson";
+	}
+	
+	public String getShopcart() throws Exception {
+		
+		//TODO
+		List<Product> prdtList = productService.getProductFromShopcart();
+		
+		if(prdtList == null){
+			return "login";
+		}
+		
+		dataMap.put("productList", prdtList);
 		
 		return "returnJson";
 	}

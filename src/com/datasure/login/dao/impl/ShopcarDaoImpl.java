@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.datasure.common.dao.impl.BaseDaoHibernate3;
 import com.datasure.login.dao.ShopcarDao;
+import com.datasure.login.domain.Product;
 import com.datasure.login.domain.Shopcar;
 import com.datasure.login.domain.User;
 
@@ -41,9 +42,6 @@ public class ShopcarDaoImpl extends BaseDaoHibernate3<Shopcar> implements
 		catch(Exception e){
 			e.printStackTrace();
 		}
-/*		String hql = "update Shopcar set productnum="+shopcar.getProductnum()
-					+" where shopcarid=" + shopcar.getShopcarid();
-		find(hql);*/
 	}
 
 	@Override
@@ -82,5 +80,7 @@ public class ShopcarDaoImpl extends BaseDaoHibernate3<Shopcar> implements
 		}
 		return null;
 	}
+
+	
 
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.datasure.login.dao.ProductDao;
 import com.datasure.login.dao.ShopcarDao;
+import com.datasure.login.dao.UserDao;
 import com.datasure.login.domain.Product;
 import com.datasure.login.domain.Shopcar;
 import com.datasure.login.domain.User;
@@ -23,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	public ProductDao productDao;
 	public ShopcarDao shopcarDao;
-//	public UserDao userDao;
+	public UserDao userDao;
 	public UserService userService;
 	
 	
@@ -142,6 +143,23 @@ public class ProductServiceImpl implements ProductService {
 		
 		
 	}
+	
+	@Override
+	public List<Product> getProductFromShopcart() {
+		//1.获取对应的User
+		User user = userService.getUserFromSession();
+		
+		if(user == null) return null;
+		//2.根据user获取对应的productid与productnum
+		List<Product> shopcartList = productDao.getProductFromShopcart(user);
+		//3.根据productid获取详细的product信息
+		
+		//4.统计product数量与总金额
+		
+		//TODO
+		
+		return shopcartList;
+	}
 
 	
 
@@ -153,20 +171,21 @@ public class ProductServiceImpl implements ProductService {
 	public void setProductDao(ProductDao productDao) {
 		this.productDao = productDao;
 	}
+	
 	@Resource
 	public void setShopcarDao(ShopcarDao shopcarDao) {
 		this.shopcarDao = shopcarDao;
 	}
+	
 	@Resource
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-	
-	
-/*	@Resource
+
+	@Resource
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
-	}*/
+	}
 	
 	
 

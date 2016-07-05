@@ -33,6 +33,8 @@ public abstract class BaseAction extends ActionSupport implements
 	//用于操作Cookie
 	public CookieUtils cookieUtil = new CookieUtils();
 	
+	public String returnPageURL;
+	
 	// 得到Action类的全名
 	protected abstract String getActionClassFullName();
 	

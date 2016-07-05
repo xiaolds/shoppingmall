@@ -1,0 +1,11 @@
+
+
+.home_body{
+    border: 1px solid red;
+    padding: 100px 0;
+}
+
+#product_table{
+    position:relative;
+    margin:0 auto;
+}

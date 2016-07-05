@@ -2,17 +2,24 @@ package com.datasure.common.dao.impl;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.hibernate.Query;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.type.Type;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.expression.StandardBeanExpressionResolver;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.datasure.common.dao.BaseDao;
+import com.sun.xml.internal.bind.api.impl.NameConverter.Standard;
 
 @Repository("baseDao")
 public class BaseDaoHibernate3<T> extends HibernateDaoSupport
@@ -54,6 +61,33 @@ public class BaseDaoHibernate3<T> extends HibernateDaoSupport
 				throws DataAccessException
 	{
 		delete(get(entityClazz , id));
+	}
+	
+	protected List<T> findWithSql(final String sql, final Class<T> c,
+			final Map<String, Type> map) throws DataAccessException{
+		
+		// 通过一个HibernateCallback对象来执行查询
+		List<T> list = getHibernateTemplate()
+			.execute(new HibernateCallback<List<T>>()
+		{
+			// 实现HibernateCallback接口必须实现的方法
+			public List<T> doInHibernate(Session session)
+			{
+
+				SQLQuery query =  session.createSQLQuery(sql)
+									.addEntity(c);
+				
+				Set<Entry<String, Type>> set = map.entrySet();
+				for(Entry<String, Type> e: set){
+					String column = e.getKey();
+					Type type = (Type) e.getValue();
+					query.addScalar(column, type);
+				}
+					
+				return query.list();
+			}
+		});
+		return list;
 	}
 	
 	//根据HQL语句查询实体
