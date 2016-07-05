@@ -72,9 +72,9 @@ public class UserAction extends BaseAction{
 			else{
 				c = cookieUtil.updateCookie(c, getNickName().trim());
 			}
-			
+			//·µ»ØCookie
 			response.addCookie(c);
-			
+			//Ë¢ÐÂ
 			response.flushBuffer();
 			
 		}else{

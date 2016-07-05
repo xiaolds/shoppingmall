@@ -35,7 +35,15 @@ public class ShopcarDaoImpl extends BaseDaoHibernate3<Shopcar> implements
 	@Override
 	public void updateProductInShopcar(Shopcar shopcar)
 			throws DataAccessException {
-		update(shopcar);
+		try{
+			update(shopcar);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+/*		String hql = "update Shopcar set productnum="+shopcar.getProductnum()
+					+" where shopcarid=" + shopcar.getShopcarid();
+		find(hql);*/
 	}
 
 	@Override
@@ -47,7 +55,7 @@ public class ShopcarDaoImpl extends BaseDaoHibernate3<Shopcar> implements
 	@Override
 	public Shopcar getProcuctFromShopcar(User user, int productId)
 			throws DataAccessException {
-		String hql = "select s from Shopcar s where s.user="+
+		String hql = "select s from Shopcar s where s.User="+
 					user + " and s.productid="+productId;
 		List<Shopcar> shopcarList = find(hql);
 		
@@ -61,12 +69,14 @@ public class ShopcarDaoImpl extends BaseDaoHibernate3<Shopcar> implements
 	@Override
 	public Shopcar getProcuctFromShopcar(Shopcar shopcar)
 			throws DataAccessException {
+
 		
-		String hql = "select s from Shopcar s where s.user = " + 
-					shopcar.getUser()+" and s.productid" +
-					shopcar.getProductid();
+		String hql = null;
+		hql = "select s from Shopcar s where s.productid=?0 " +
+				"and s.User=?1";
 		
-		List<Shopcar> shopList = find(hql);
+		List<Shopcar> shopList = find(hql,shopcar.getProductid(),
+				shopcar.getUser());
 		if(0 != shopList.size()){
 			return shopList.get(0);
 		}

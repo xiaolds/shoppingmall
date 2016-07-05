@@ -44,8 +44,7 @@ public class ProductServiceImpl implements ProductService {
 	public void saveProductToShopcar(Shopcar shopcar) {
 		//第一步，查询商品是否已经存在
 		Shopcar shop = 
-			shopcarDao.getProcuctFromShopcar(shopcar.getUser(),
-					shopcar.getProductid());
+			shopcarDao.getProcuctFromShopcar(shopcar);
 		
 		if(shop != null){
 			//数据库中存在该商品,更新数据信息
@@ -112,7 +111,15 @@ public class ProductServiceImpl implements ProductService {
 				//构造 Shopcar
 				Shopcar s = new Shopcar(user, prdtId, prdtNum);
 				//从数据库中获取该shopcar
-				Shopcar ss = shopcarDao.getProcuctFromShopcar(s);
+				Shopcar ss = null;
+				 try{
+					 //TODO
+					 ss = shopcarDao.getProcuctFromShopcar(s);
+					 System.out.println(ss);
+				 }
+				 catch(Exception e){
+					 e.printStackTrace();
+				 }
 				
 				if(null != ss){
 					//数据库中存在该记录，刷新
