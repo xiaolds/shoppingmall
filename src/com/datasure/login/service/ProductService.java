@@ -1,6 +1,7 @@
 package com.datasure.login.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,10 +63,9 @@ public interface ProductService {
 	
 	/**
 	 * 
-	 * getProductFromShopcart:(通过用户名查找对应的购物车中的商品). <br/>
+	 * getProductFromShopcart:(这里用一句话描述这个方法的作用). <br/>
 	 * @author LiDongSheng
-	 * @param nickname
 	 * @return
 	 */
-	public List<Product> getProductFromShopcart();
+	public List<Map<String,Object>> getProductFromShopcart();
 }

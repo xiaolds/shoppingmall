@@ -122,7 +122,8 @@ public class UserAction extends BaseAction{
 	}
 	
 	
-	/***用户查询方法*****/
+	/***用户查询方法，以后可以整合为一个函数*****/
+	//TODO
 	//使用姓名查询用户
 	public String findUserByNickName() throws Exception{
 		
@@ -196,18 +197,26 @@ public class UserAction extends BaseAction{
 		return "returnJson";
 	}
 	
+	//返回特定用户购物车中的所有商品
 	public String getShopcart() throws Exception {
 		
-		//TODO
-		List<Product> prdtList = productService.getProductFromShopcart();
+		List<Map<String,Object>> prdtList = productService.getProductFromShopcart();
+		dataMap.put("prdtList", prdtList);
+		return "returnJson";
+	}
+	
+	//通过Session获取用户姓名
+	public String getOnlineUserName() throws Exception{
 		
-		if(prdtList == null){
-			return "login";
+		User user = userService.getUserFromSession();
+		if(null != user){
+			dataMap.put("UserName", user.getNickname());
+		}else{
+			//do nothing
 		}
 		
-		dataMap.put("data", prdtList);
-		
 		return "returnJson";
+		
 	}
 	
 

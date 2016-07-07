@@ -86,6 +86,7 @@
     <context:annotation-config/>
     <!-- 需要自动扫描的包 --> 
     <context:component-scan base-package="com.datasure"/>
+    <context:component-scan base-package="test/com.datasure"/>
     
 	<aop:config>
 	    <!-- 切点 -->

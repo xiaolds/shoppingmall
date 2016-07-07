@@ -41,7 +41,6 @@ public class ProductDaoImpl extends BaseDaoHibernate3<Product>
 				
 				
 			}	//end of for
-//			sb.append(";");
 		}	//end of if
 		System.out.println("Product Hql:"+sb);
 		
@@ -51,27 +50,11 @@ public class ProductDaoImpl extends BaseDaoHibernate3<Product>
 	@Override
 	public List<Product> getProductFromShopcart(User user) {
 		
-		/*
-		 * SELECT 
-  			p.`productid`,
-  			p.`name`,
-  			p.`description`,
-  			s.productnum 
-		   FROM
-  			d_product p 
-  			INNER JOIN d_shopcar s 
-    		ON s.`productid` = p.`productid` 
-    		AND s.`userid` = 2 ;
-		 */
-		/*String hql = "select p from Product p inner join Shopcar.product as s with " +
-				"s.productid=p.productid and s.userid=" +
-				user.getId();*/
-		
-		String sql = "select p.* from shoppingmall.d_product p inner join " +
+		String sql = "select p.*,s.productnum from shoppingmall.d_product p inner join " +
 				"shoppingmall.d_shopcar s on s.productid = p.productid " +
 				"and s.userid="+user.getId();
+		
 		Map<String, Type> map = new HashMap<String, Type>(0);
-//		map.put("")
 		List<Product> list = findWithSql(sql, Product.class,map);
 		return list;
 	}

@@ -1,11 +1,16 @@
 package com.datasure.login.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Service;
 
@@ -145,20 +150,30 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public List<Product> getProductFromShopcart() {
+	public List<Map<String,Object>> getProductFromShopcart() {
 		//1.获取对应的User
 		User user = userService.getUserFromSession();
 		
 		if(user == null) return null;
-		//2.根据user获取对应的productid与productnum
+		//2.根据user获取对应的Product
 		List<Product> shopcartList = productDao.getProductFromShopcart(user);
-		//3.根据productid获取详细的product信息
+		List<Map<String,Object>> filteredList =
+			new ArrayList<Map<String,Object>>();
 		
-		//4.统计product数量与总金额
+		//3.对shopcarList进行筛选
+		for(Product p: shopcartList){
+			
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("prdtId", p.getProductid());
+			map.put("prdtName", p.getName());
+			map.put("prdtPrice", p.getPresentprice());
+			//添加商品的数量prdtNum
+			
+			filteredList.add(map);
+			
+		}
 		
-		//TODO
-		
-		return shopcartList;
+		return filteredList;
 	}
 
 	
