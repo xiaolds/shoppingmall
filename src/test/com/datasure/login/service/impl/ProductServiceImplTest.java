@@ -1,4 +1,4 @@
-package com.datasure.login.service.impl;
+package test.com.datasure.login.service.impl;
 
 import static org.junit.Assert.*;
 

@@ -153,104 +153,15 @@ public class Product implements java.io.Serializable {
 		this.keyword = keyword;
 	}
 	
-	
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((Category == null) ? 0 : Category.hashCode());
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
-		result = prime * result
-				+ ((downdate == null) ? 0 : downdate.hashCode());
-		result = prime * result + ((keyword == null) ? 0 : keyword.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result
-				+ ((originprice == null) ? 0 : originprice.hashCode());
-		result = prime * result + ((picture == null) ? 0 : picture.hashCode());
-		result = prime * result
-				+ ((presentprice == null) ? 0 : presentprice.hashCode());
-		result = prime * result
-				+ ((productid == null) ? 0 : productid.hashCode());
-		result = prime * result
-				+ ((sellnumber == null) ? 0 : sellnumber.hashCode());
-		result = prime * result + ((stock == null) ? 0 : stock.hashCode());
-		result = prime * result + ((update == null) ? 0 : update.hashCode());
-		return result;
+	public String toString() {
+		return "Product [productid=" + productid + ", Category=" + Category
+				+ ", name=" + name + ", originprice=" + originprice
+				+ ", update=" + update + ", downdate=" + downdate + ", stock="
+				+ stock + ", description=" + description + ", sellnumber="
+				+ sellnumber + ", picture=" + picture + ", keyword=" + keyword
+				+ "]";
 	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Product other = (Product) obj;
-		if (Category == null) {
-			if (other.Category != null)
-				return false;
-		} else if (!Category.equals(other.Category))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (downdate == null) {
-			if (other.downdate != null)
-				return false;
-		} else if (!downdate.equals(other.downdate))
-			return false;
-		if (keyword == null) {
-			if (other.keyword != null)
-				return false;
-		} else if (!keyword.equals(other.keyword))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (originprice == null) {
-			if (other.originprice != null)
-				return false;
-		} else if (!originprice.equals(other.originprice))
-			return false;
-		if (picture == null) {
-			if (other.picture != null)
-				return false;
-		} else if (!picture.equals(other.picture))
-			return false;
-		if (presentprice == null) {
-			if (other.presentprice != null)
-				return false;
-		} else if (!presentprice.equals(other.presentprice))
-			return false;
-		if (productid == null) {
-			if (other.productid != null)
-				return false;
-		} else if (!productid.equals(other.productid))
-			return false;
-		if (sellnumber == null) {
-			if (other.sellnumber != null)
-				return false;
-		} else if (!sellnumber.equals(other.sellnumber))
-			return false;
-		if (stock == null) {
-			if (other.stock != null)
-				return false;
-		} else if (!stock.equals(other.stock))
-			return false;
-		if (update == null) {
-			if (other.update != null)
-				return false;
-		} else if (!update.equals(other.update))
-			return false;
-		return true;
-	}
-
 	
 	
 
